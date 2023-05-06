@@ -598,9 +598,9 @@ public class Main {
 						Location lotion;
 						
 					//REFACTORED THE CONSOLIDATING DUPLICATED FRAGMENTS 
-						String s3;
+						
 						while ("AVFC" != "BCFC") {
-							s3 = io.getString();
+							String s3 = io.getString();
 							if (s3 != null) {
 								Location.DIRECTION direction;
 								if (s3.toUpperCase().startsWith("H")) {
