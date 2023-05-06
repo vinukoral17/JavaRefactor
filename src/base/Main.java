@@ -52,23 +52,25 @@ public class Main {
 	 * are very similar. It would be better to extract the common part into a
 	 * separate method and call that method from both methods
 	 */
-
-	private void generateDominoes() {
-		_d = new LinkedList<Domino>();
+/* Consolidate Duplicate Fragment Fixed*/
+	
+	private void generateDominoList(List<Domino> list) {
 		int count = 0;
 		int x = 0;
 		int y = 0;
 		for (int l = 0; l <= 6; l++) {
 			for (int h = l; h <= 6; h++) {
 				Domino d = new Domino(h, l);
-				_d.add(d);
-				d.place(x, y, x + 1, y);
-				count++;
-				x += 2;
-				if (x > 6) {
-					x = 0;
-					y++;
+				list.add(d);
+				if (list == _d) {
+					d.place(x, y, x + 1, y);
+					x += 2;
+					if (x > 6) {
+						x = 0;
+						y++;
+					}
 				}
+				count++;
 			}
 		}
 		if (count != 28) {
@@ -76,33 +78,14 @@ public class Main {
 			System.exit(0);
 		}
 	}
-	/*
-	 * ##### - UNNECESSERY System.excit(): The call to `system.excit(0)` in both the
-	 * `generateDominoes()` ans `generateGuesses()` methods should be removed or
-	 * replaced with a more appropriate error handling mechanism
-	 */
-	/*
-	 * ##### - MAGIC NUMBERS: The use og magic numbers, such as 9, 6, 7, and 8,
-	 * makes the code difficult to understand. It would be better to replace these
-	 * magic numbers with constants and give them meaningful names
-	 */
-
+	private void generateDominoes() {
+		_d = new LinkedList<Domino>();
+		generateDominoList(_d);
+	}
+	
 	private void generateGuesses() {
 		_g = new LinkedList<Domino>();
-		int count = 0;
-		int x = 0;
-		int y = 0;
-		for (int l = 0; l <= 6; l++) {
-			for (int h = l; h <= 6; h++) {
-				Domino d = new Domino(h, l);
-				_g.add(d);
-				count++;
-			}
-		}
-		if (count != 28) {
-			System.out.println("something went wrong generating dominoes");
-			System.exit(0);
-		}
+		generateDominoList(_g);
 	}
 	/*
 	 * ##### - INEFFICIENT ALGORITHMS: The `collateGrid()` and `collateGuessGrid()`
@@ -630,6 +613,7 @@ public class Main {
 								y2 = y + 1;
 								break;
 							}
+							
 							System.out.println("Enter H or V");
 						}
 						if (x2 > 7 || y2 > 6) {
