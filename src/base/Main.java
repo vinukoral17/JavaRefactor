@@ -306,39 +306,51 @@ public class Main {
 	 */
 
 	private Domino findDominoAt(int x, int y) {
-		for (Domino d : _d) {
-			if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
-				return d;
-			}
-		}
-		return null;
+	    for (Domino d : _d) {
+	        int dominoLowX = d.lx;
+	        int dominoLowY = d.ly;
+	        int dominoHighX = d.hx;
+	        int dominoHighY = d.hy;
+	        if ((dominoLowX == x && dominoLowY == y) || (dominoHighX == x && dominoHighY == y)) {
+	            return d;
+	        }
+	    }
+	    return null;
 	}
 
 	private Domino findGuessAt(int x, int y) {
-		for (Domino d : _g) {
-			if ((d.lx == x && d.ly == y) || (d.hx == x && d.hy == y)) {
-				return d;
-			}
-		}
-		return null;
+	    for (Domino d : _g) {
+	        int guessLowX = d.lx;
+	        int guessLowY = d.ly;
+	        int guessHighX = d.hx;
+	        int guessHighY = d.hy;
+	        if ((guessLowX == x && guessLowY == y) || (guessHighX == x && guessHighY == y)) {
+	            return d;
+	        }
+	    }
+	    return null;
 	}
 
 	private Domino findGuessByLH(int x, int y) {
-		for (Domino d : _g) {
-			if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
-				return d;
-			}
-		}
-		return null;
+	    for (Domino d : _g) {
+	        int guessLow = d.low;
+	        int guessHigh = d.high;
+	        if ((guessLow == x && guessHigh == y) || (guessHigh == x && guessLow == y)) {
+	            return d;
+	        }
+	    }
+	    return null;
 	}
 
 	private Domino findDominoByLH(int x, int y) {
-		for (Domino d : _d) {
-			if ((d.low == x && d.high == y) || (d.high == x && d.low == y)) {
-				return d;
-			}
-		}
-		return null;
+	    for (Domino d : _d) {
+	        int dominoLow = d.low;
+	        int dominoHigh = d.high;
+	        if ((dominoLow == x && dominoHigh == y) || (dominoHigh == x && dominoLow == y)) {
+	            return d;
+	        }
+	    }
+	    return null;
 	}
 
 	private void printDominoes() {
