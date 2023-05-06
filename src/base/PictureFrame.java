@@ -18,9 +18,9 @@ public class PictureFrame {
 	public Main master = null;
 
 	/*
-	 * ##### - LONG METHOD
-	 * The DominoPanel class has multiple long methods that perform multiple task and are difficult to understand
-	 * */
+	 * ##### - LONG METHOD The DominoPanel class has multiple long methods that
+	 * perform multiple task and are difficult to understand
+	 */
 	class DominoPanel extends JPanel {
 		private static final long serialVersionUID = 4190229282411119364L;
 
@@ -31,11 +31,14 @@ public class PictureFrame {
 				}
 			}
 		}
-										/*##### - POOR NAMING CONVENTIONS
-										 * 
-										 * The names of some variables and methods are not descriptive enough to understand their purpose 
-										 * (reroll, see, are, drawDigitGivenCentre, fillDigitGivenCentre).
-										 * */
+
+		/*
+		 * ##### - POOR NAMING CONVENTIONS
+		 * 
+		 * The names of some variables and methods are not descriptive enough to
+		 * understand their purpose (reroll, see, are, drawDigitGivenCentre,
+		 * fillDigitGivenCentre).
+		 */
 		public void drawHeadings(Graphics g) {
 			for (int are = 0; are < 7; are++) {
 				fillDigitGivenCentre(g, 10, 30 + are * 20, 20, are + 1);
@@ -45,11 +48,14 @@ public class PictureFrame {
 				fillDigitGivenCentre(g, 30 + see * 20, 10, 20, see + 1);
 			}
 		}
-										/*##### - HARDCODED VALUES
-										 * 
-										 * Some values such as colors (Color.WHITE, Color.RED, Color.BLUE, Color.GREEN, Color.BLACK, Color.YELLOW) 
-										 * are hardcoded and make the code difficult to maintain.
-										 * */
+
+		/*
+		 * ##### - HARDCODED VALUES
+		 * 
+		 * Some values such as colors (Color.WHITE, Color.RED, Color.BLUE, Color.GREEN,
+		 * Color.BLACK, Color.YELLOW) are hardcoded and make the code difficult to
+		 * maintain.
+		 */
 		public void drawDomino(Graphics g, Domino d) {
 			if (d.placed) {
 				int y = Math.min(d.ly, d.hy);
@@ -68,13 +74,11 @@ public class PictureFrame {
 		void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n) {
 			int radius = diameter / 2;
 			g.setColor(Color.BLACK);
-									/*
-									 * ##### - UNUSED CODE 
-									 * The commented-out lines of code (g.drawOval and g.fillOval) 
-									 * indicate that the code is not being used and should be removed
-									 * */
-			
-			
+			/*
+			 * ##### - UNUSED CODE The commented-out lines of code (g.drawOval and
+			 * g.fillOval) indicate that the code is not being used and should be removed
+			 */
+
 // g.drawOval(x - radius, y - radius, diameter, diameter);
 			FontMetrics fm = g.getFontMetrics();
 // convert the string to an integer
@@ -105,10 +109,11 @@ public class PictureFrame {
 		protected void paintComponent(Graphics g) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(0, 0, getWidth(), getHeight());
-			
-			/*##### - MISSING COMMENTS 
-			 * Some methods lack comments, making it difficult to understand their purpose such as `numbaz` method.
-			 * */
+
+			/*
+			 * ##### - MISSING COMMENTS Some methods lack comments, making it difficult to
+			 * understand their purpose such as `numbaz` method.
+			 */
 // numbaz(g);
 //
 // if (master!=null && master.orig != null) {
