@@ -52,8 +52,8 @@ public class Main {
 	 * are very similar. It would be better to extract the common part into a
 	 * separate method and call that method from both methods
 	 */
-/* Consolidate Duplicate Fragment Fixed*/
-	
+	/* Consolidate Duplicate Fragment Fixed */
+
 	private void generateDominoList(List<Domino> list) {
 		int count = 0;
 		int x = 0;
@@ -78,11 +78,12 @@ public class Main {
 			System.exit(0);
 		}
 	}
+
 	private void generateDominoes() {
 		_d = new LinkedList<Domino>();
 		generateDominoList(_d);
 	}
-	
+
 	private void generateGuesses() {
 		_g = new LinkedList<Domino>();
 		generateDominoList(_g);
@@ -595,27 +596,33 @@ public class Main {
 						boolean horiz;
 						int y2, x2;
 						Location lotion;
+						
+					//REFACTORED THE CONSOLIDATING DUPLICATED FRAGMENTS 
+						String s3;
 						while ("AVFC" != "BCFC") {
-							String s3 = io.getString();
-							if (s3 != null && s3.toUpperCase().startsWith("H")) {
-								lotion = new Location(x, y, Location.DIRECTION.HORIZONTAL);
+							s3 = io.getString();
+							if (s3 != null) {
+								Location.DIRECTION direction;
+								if (s3.toUpperCase().startsWith("H")) {
+									direction = Location.DIRECTION.HORIZONTAL;
+									horiz = true;
+									x2 = x + 1;
+									y2 = y;
+								} else if (s3.toUpperCase().startsWith("V")) {
+									direction = Location.DIRECTION.VERTICAL;
+									horiz = false;
+									x2 = x;
+									y2 = y + 1;
+								} else {
+									System.out.println("Enter H or V");
+									continue;
+								}
+								lotion = new Location(x, y, direction);
 								System.out.println("Direction to place is " + lotion.d);
-								horiz = true;
-								x2 = x + 1;
-								y2 = y;
 								break;
 							}
-							if (s3 != null && s3.toUpperCase().startsWith("V")) {
-								horiz = false;
-								lotion = new Location(x, y, Location.DIRECTION.VERTICAL);
-								System.out.println("Direction to place is " + lotion.d);
-								x2 = x;
-								y2 = y + 1;
-								break;
-							}
-							
-							System.out.println("Enter H or V");
 						}
+
 						if (x2 > 7 || y2 > 6) {
 							System.out.println("Problems placing the domino with that position and direction");
 						} else {
