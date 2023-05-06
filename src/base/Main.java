@@ -233,41 +233,47 @@ public class Main {
 	 * */
 	 
 	private void tryToRotateDominoAt(int x, int y) {
-		Domino d = findDominoAt(x, y);
-		if (thisIsTopLeftOfDomino(x, y, d)) {
-			if (d.ishl()) {
-				boolean weFancyARotation = Math.random() < 0.5;
-				if (weFancyARotation) {
-					if (theCellBelowIsTopLeftOfHorizontalDomino(x, y)) {
-						Domino e = findDominoAt(x, y + 1);
-						e.hx = x;
-						e.lx = x;
-						d.hx = x + 1;
-						d.lx = x + 1;
-						e.ly = y + 1;
-						e.hy = y;
-						d.ly = y + 1;
-						d.hy = y;
-					}
-				}
-			} else {
-				boolean weFancyARotation = Math.random() < 0.5;
-				if (weFancyARotation) {
-					if (theCellToTheRightIsTopLeftOfVerticalDomino(x, y)) {
-						Domino e = findDominoAt(x + 1, y);
-						e.hx = x;
-						e.lx = x + 1;
-						d.hx = x;
-						d.lx = x + 1;
-						e.ly = y + 1;
-						e.hy = y + 1;
-						d.ly = y;
-						d.hy = y;
-					}
-				}
+	    Domino d = findDominoAt(x, y);
+	    if (thisIsTopLeftOfDomino(x, y, d)) {
+	        if (d.ishl()) {
+	            tryToRotateHorizontalDomino(x, y);
+	        } else {
+	            tryToRotateVerticalDomino(x, y);
+	        }
+	    }
+	}
 
-			}
-		}
+	private void tryToRotateHorizontalDomino(int x, int y) {
+	    boolean weFancyARotation = Math.random() < 0.5;
+	    if (weFancyARotation) {
+	        if (theCellBelowIsTopLeftOfHorizontalDomino(x, y)) {
+	            Domino d = findDominoAt(x, y);
+	            Domino e = findDominoAt(x, y + 1);
+	            rotateDomino(d, e, x, y + 1, x + 1, y, x + 1, y + 1, y);
+	        }
+	    }
+	}
+
+	private void tryToRotateVerticalDomino(int x, int y) {
+	    boolean weFancyARotation = Math.random() < 0.5;
+	    if (weFancyARotation) {
+	        if (theCellToTheRightIsTopLeftOfVerticalDomino(x, y)) {
+	            Domino d = findDominoAt(x, y);
+	            Domino e = findDominoAt(x + 1, y);
+	            rotateDomino(d, e, x, y, x + 1, y, x, y + 1, y + 1);
+	        }
+	    }
+	}
+
+	private void rotateDomino(Domino d1, Domino d2, int x1, int y1, int x2, int y2, int x3, int y3, int y4) {
+	    d1.hx = x2;
+	    d1.lx = x2;
+	    d2.hx = x1;
+	    d2.lx = x1;
+	    d1.ly = y3;
+	    d1.hy = y4;
+	    d2.ly = y1;
+	    d2.hy = y2;
 	}
 // 
 	
