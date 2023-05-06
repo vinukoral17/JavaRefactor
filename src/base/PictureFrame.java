@@ -40,12 +40,13 @@ public class PictureFrame {
 		 * fillDigitGivenCentre).
 		 */
 		public void drawHeadings(Graphics g) {
-			for (int are = 0; are < 7; are++) {
-				fillDigitGivenCentre(g, 10, 30 + are * 20, 20, are + 1);
-			}
+			drawRowOfDigits(g, 10, 30, 7, 20, 1);
+			drawRowOfDigits(g, 30, 10, 8, 20, 1);
+		}
 
-			for (int see = 0; see < 8; see++) {
-				fillDigitGivenCentre(g, 30 + see * 20, 10, 20, see + 1);
+		private void drawRowOfDigits(Graphics g, int num1, int num2, int count, int spacing, int initialDigit) {
+			for (int i = 0; i < count; i++) {
+				fillDigitGivenCentre(g, num1 + i * spacing, num2 + i * spacing, 20, initialDigit + i);
 			}
 		}
 
