@@ -77,7 +77,7 @@ public class Domino implements Comparable<Domino> {
 	 * 
 	 * @return boolean value indicating if the domino piece is placed horizontally
 	 */
-	public boolean ishl() {
+	public boolean isDominoHorizontal() {
 		return hy == ly;
 	}
 
