@@ -396,8 +396,8 @@ playerName, MultiLingualStringTable.getMessage(2));
 	 *The code does not handle exceptions in a meaningful way and simply sets the value of "$" to -9, 
 	 *which can lead to unexpected behaviour. 
 	 **/
-int _$_ = -9;
-while (_$_ != ZERO) { //##################################################################### THIS WHILE LOOP ENDS AT LINE 1036
+int newnumber = -9;
+while (newnumber != ZERO) { //##################################################################### THIS WHILE LOOP ENDS AT LINE 1036
 System.out.println();
 String h1 = "Main menu";
 String u1 = h1.replaceAll(".", "=");
@@ -429,16 +429,16 @@ System.out.println("0) Quit");
 	 * 
 	 * */
 
-_$_ = -9;
-while (_$_ == -9) {
+newnumber = -9;
+while (newnumber == -9) {
 try {
 String s1 = io.getString();
-_$_ = Integer.parseInt(s1);
+newnumber = Integer.parseInt(s1);
 } catch (Exception e) {
-_$_ = -9;
+newnumber = -9;
 }
 }
-switch (_$_) {
+switch (newnumber) {
 case 5:
 int index = (int) (Math.random() * (_Q.stuff.length / 3));
 String what = _Q.stuff[index * 3];
