@@ -353,16 +353,18 @@ public class Main {
 	    return null;
 	}
 
+	private void printDominoList(List<Domino> dominoList) {
+	    for (Domino d : dominoList) {
+	        System.out.println(d);
+	    }
+	}
+
 	private void printDominoes() {
-		for (Domino d : _d) {
-			System.out.println(d);
-		}
+	    printDominoList(_d);
 	}
 
 	private void printGuesses() {
-		for (Domino d : _g) {
-			System.out.println(d);
-		}
+	    printDominoList(_g);
 	}
 
 	/*
