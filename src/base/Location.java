@@ -9,30 +9,35 @@ import java.io.InputStreamReader;
  * @author Kevan Buckley, maintained by __student
  * @version 2.0, 2014
  */
-/*##### - TIGHT COUPLING
- * The Location class is tightly coupled to the class SpacePlace, 
- * as it extends it, making it harder to maintain or reuse in other contexts.
- * */
+/*
+ * ##### - TIGHT COUPLING The Location class is tightly coupled to the class
+ * SpacePlace, as it extends it, making it harder to maintain or reuse in other
+ * contexts.
+ */
 //there are 6 methods inside this class
 public class Location extends SpacePlace {
 	public int c;
 	public int r;
 	public DIRECTION d;
 	public int tmp;
-/*
- * ##### - UNCLEAR NAMING CONVENTION - 
- * The tmp variable seems to have multiple uses, making it hard to understand what it represents.
- * */
-	/*##### - UNUSED CODE 
-	 * The `DIRECTION` enumeration is not used anywhere in the code, making it redundant.
-	 * */
+
+	/*
+	 * ##### - UNCLEAR NAMING CONVENTION - The tmp variable seems to have multiple
+	 * uses, making it hard to understand what it represents.
+	 */
+	/*
+	 * ##### - UNUSED CODE The `DIRECTION` enumeration is not used anywhere in the
+	 * code, making it redundant.
+	 */
 	public enum DIRECTION {
 		VERTICAL, HORIZONTAL
 	};
-/* ##### - MULTIPLE RESPONSIBILE 
- * The `Location` class have multiple responsibilities, such as defining a location, and drawing gridlines,
- * which makes it harder to understand and maintain
- * */
+
+	/*
+	 * ##### - MULTIPLE RESPONSIBILE The `Location` class have multiple
+	 * responsibilities, such as defining a location, and drawing gridlines, which
+	 * makes it harder to understand and maintain
+	 */
 	public Location(int r, int c) {
 		this.r = r;
 		this.c = c;
@@ -53,17 +58,21 @@ public class Location extends SpacePlace {
 		}
 	}
 
-	/*##### - MAGIC NUMBER - 
-	 * The number 20 and 160 appear multiple times in the code, 
-	 * and their purpose may not be immediately clear.
-	 * */
+	/*
+	 * ##### - MAGIC NUMBER - The number 20 and 160 appear multiple times in the
+	 * code, and their purpose may not be immediately clear.
+	 */
 	public void drawGridLines(Graphics g) {
+
 		g.setColor(Color.LIGHT_GRAY);
-		for (tmp = 0; tmp <= 7; tmp++) {
-			g.drawLine(20, 20 + tmp * 20, 180, 20 + tmp * 20);
+		final int GRID_START = 20;
+		final int GRID_END = 180;
+
+		for (int tmp = 0; tmp <= 7; tmp++) {
+			g.drawLine(GRID_START, GRID_START + tmp * 20, GRID_END, GRID_START + tmp * 20);
 		}
 		for (int see = 0; see <= 8; see++) {
-			g.drawLine(20 + see * 20, 20, 20 + see * 20, 160);
+			g.drawLine(GRID_START + see * 20, GRID_START, GRID_START + see * 20, GRID_END - GRID_START);
 		}
 	}
 
