@@ -24,11 +24,11 @@ public class Domino implements Comparable<Domino> {
 		this.low = low;
 	}
 
-	public void place(int hx, int hy, int lx, int ly) {
-		this.hx = hx;
-		this.hy = hy;
-		this.lx = lx;
-		this.ly = ly;
+	public void place(int highX, int highY, int lowX, int lowY) {
+		this.hx = highX;
+		this.hy = highY;
+		this.lx = lowX;
+		this.ly = lowY;
 		placed = true;
 	}
 
