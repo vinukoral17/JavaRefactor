@@ -48,14 +48,18 @@ public class PictureFrame {
 		 * fillDigitGivenCentre).
 		 */
 		public void drawHeadings(Graphics g) {
-			drawRowOfDigits(g, 10, 30, 7, 20, 1);
-			drawRowOfDigits(g, 30, 10, 8, 20, 1);
+		    RowOfDigits row1 = new RowOfDigits(10, 30, 7, 20, 1);
+		    RowOfDigits row2 = new RowOfDigits(30, 10, 8, 20, 1);
+
+		    drawRowOfDigits(g, row1);
+		    drawRowOfDigits(g, row2);
 		}
 
-		private void drawRowOfDigits(Graphics g, int num1, int num2, int count, int spacing, int initialDigit) {
-			for (int i = 0; i < count; i++) {
-				fillDigitGivenCentre(g, num1 + i * spacing, num2 + i * spacing, 20, initialDigit + i);
-			}
+		private void drawRowOfDigits(Graphics g, RowOfDigits row) {
+		    for (int i = 0; i < row.getCount(); i++) {
+		        fillDigitGivenCentre(g, row.getNum1() + i * row.getSpacing(), 
+		            row.getNum2() + i * row.getSpacing(), 20, row.getInitialDigit() + i);
+		    }
 		}
 
 		/*
