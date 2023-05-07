@@ -24,12 +24,20 @@ public class PictureFrame {
 	class DominoPanel extends JPanel {
 		private static final long serialVersionUID = 4190229282411119364L;
 
-		public void drawGrid(Graphics g) {
-			for (int are = 0; are < 7; are++) {
-				for (int see = 0; see < 8; see++) {
-					drawDigitGivenCentre(g, 30 + see * 20, 30 + are * 20, 20, master.grid[are][see]);
-				}
-			}
+		private void drawGrid(Graphics g) {
+		    for (int row = 0; row < 7; row++) {
+		        for (int col = 0; col < 8; col++) {
+		            drawDigit(g, row, col);
+		        }
+		    }
+		}
+
+		private void drawDigit(Graphics g, int row, int col) {
+		    int x = 30 + col * 20;
+		    int y = 30 + row * 20;
+		    int diameter = 20;
+		    int n = master.grid[row][col];
+		    drawDigitGivenCentre(g, x, y, diameter, n);
 		}
 
 		/*
