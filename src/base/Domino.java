@@ -63,13 +63,13 @@ public class Domino implements Comparable<Domino> {
 	 */
 
 	public void invert() {
-		int tx = hx;
-		hx = lx;
-		lx = tx;
+		hx = hx + lx;
+	    lx = hx - lx;
+	    hx = hx - lx;
 
-		int ty = hy;
-		hy = ly;
-		ly = ty;
+	    hy = hy + ly;
+	    ly = hy - ly;
+	    hy = hy - ly;
 	}
 
 	/*
