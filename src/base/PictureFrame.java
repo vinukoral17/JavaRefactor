@@ -69,7 +69,7 @@ public class PictureFrame {
 		 * Color.BLACK, Color.YELLOW) are hardcoded and make the code difficult to
 		 * maintain.
 		 */
-		public void drawDomino(Graphics g, Domino d) {
+		public void drawDomino(Graphics g, Domino d, DominoValues dv) {
 			if (d.placed) {
 				int y = Math.min(d.ly, d.hy);
 				int x = Math.min(d.lx, d.hx);
@@ -79,8 +79,8 @@ public class PictureFrame {
 				g.fillRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
 				g.setColor(Color.RED);
 				g.drawRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
-				drawDigitGivenCentre(g, 30 + d.hx * 20, 30 + d.hy * 20, 20, d.high, Color.BLUE);
-				drawDigitGivenCentre(g, 30 + d.lx * 20, 30 + d.ly * 20, 20, d.low, Color.BLUE);
+				drawDigitGivenCentre(g, 30 + d.hx * 20, 30 + d.hy * 20, 20, dv.high, Color.BLUE);
+				drawDigitGivenCentre(g, 30 + d.lx * 20, 30 + d.ly * 20, 20, dv.low, Color.BLUE);
 			}
 		}
 

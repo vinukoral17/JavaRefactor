@@ -44,6 +44,7 @@ public class Main {
 	int cf;
 	int score;
 	long startTime;
+	DominoValues values;
 
 	PictureFrame pf = new PictureFrame();
 
@@ -96,13 +97,13 @@ public class Main {
 	 */
 
 	void collateGrid() {
-		for (Domino d : _d) {
+		for (Domino d : _d ) {
 			if (!d.placed) {
 				grid[d.hy][d.hx] = 9;
 				grid[d.ly][d.lx] = 9;
 			} else {
-				grid[d.hy][d.hx] = d.high;
-				grid[d.ly][d.lx] = d.low;
+				grid[d.hy][d.hx] = d.values.high;
+				grid[d.ly][d.lx] = d.values.low;
 			}
 		}
 	}
@@ -115,8 +116,8 @@ public class Main {
 		}
 		for (Domino d : _g) {
 			if (d.placed) {
-				gg[d.hy][d.hx] = d.high;
-				gg[d.ly][d.lx] = d.low;
+				gg[d.hy][d.hx] = d.values.high;
+				gg[d.ly][d.lx] = d.values.low;
 			}
 		}
 	}
@@ -317,8 +318,8 @@ public class Main {
 
 	private Domino findGuessByLH(int x, int y) {
 	    for (Domino d : _g) {
-	        int guessLow = d.low;
-	        int guessHigh = d.high;
+	        int guessLow = d.values.low;
+	        int guessHigh = d.values.high;
 	        if ((guessLow == x && guessHigh == y) || (guessHigh == x && guessLow == y)) {
 	            return d;
 	        }
@@ -328,8 +329,8 @@ public class Main {
 
 	private Domino findDominoByLH(int x, int y) {
 	    for (Domino d : _d) {
-	        int dominoLow = d.low;
-	        int dominoHigh = d.high;
+	        int dominoLow = d.values.low;
+	        int dominoHigh = d.values.high;
 	        if ((dominoLow == x && dominoHigh == y) || (dominoHigh == x && dominoLow == y)) {
 	            return d;
 	        }
@@ -651,7 +652,7 @@ public class Main {
 
 							gg[y][x] = grid[y][x];
 							gg[y2][x2] = grid[y2][x2];
-							if (grid[y][x] == d.high && grid[y2][x2] == d.low) {
+							if (grid[y][x] == d.values.high && grid[y2][x2] == d.values.low) {
 								d.place(x, y, x2, y2);
 							} else {
 								d.place(x2, y2, x, y);
@@ -921,7 +922,7 @@ public class Main {
 								List<Location> locs = map.get(key);
 								if (locs.size() == 1) {
 									Location loc = locs.get(0);
-									System.out.printf("[%d%d]", key.high, key.low);
+									System.out.printf("[%d%d]", key.values.high, key.values.low);
 									System.out.println(loc);
 								}
 							}
@@ -950,7 +951,7 @@ public class Main {
 								}
 							}
 							for (Domino key : map.keySet()) {
-								System.out.printf("[%d%d]", key.high, key.low);
+								System.out.printf("[%d%d]", key.values.high, key.values.low);
 								List<Location> locs = map.get(key);
 								for (Location loc : locs) {
 									System.out.print(loc);
@@ -1159,7 +1160,7 @@ public class Main {
 
 	public void drawDominoes(Graphics g) {
 		for (Domino d : _d) {
-			pf.dp.drawDomino(g, d);
+			pf.dp.drawDomino(g, d,values);
 		}
 	}
 
@@ -1177,7 +1178,7 @@ public class Main {
 
 	public void drawGuesses(Graphics g) {
 		for (Domino d : _g) {
-			pf.dp.drawDomino(g, d);
+			pf.dp.drawDomino(g, d,values);
 		}
 	}
 //__id

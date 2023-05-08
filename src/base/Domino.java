@@ -9,12 +9,12 @@ package base;
  * @version 2.0, 2014
  */
 public class Domino implements Comparable<Domino> {
-    private final DominoValues values;
-    private int hx;
-    private int hy;
-    private int lx;
-    private int ly;
-    private boolean placed = false;
+    public final DominoValues values;
+    public int hx;
+    public int hy;
+    public int lx;
+    public int ly;
+    public boolean placed = false;
 
     public Domino(int high, int low) {
         this.values = new DominoValues(high, low);
@@ -75,8 +75,8 @@ public class Domino implements Comparable<Domino> {
 
 
 class DominoValues {
-    private final int high;
-    private final int low;
+    public final int high;
+    public final int low;
 
     public DominoValues(int high, int low) {
         this.high = high;
