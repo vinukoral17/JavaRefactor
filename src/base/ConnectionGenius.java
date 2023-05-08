@@ -16,39 +16,40 @@ import java.net.InetAddress;
  * Inefficient implementation: The code does not make use of the InetAddress instance
  * variable, which may indicate an inefficient implementation */
 
-public class ConnectionGenius {
+public abstract class ConnectionGenius {
+	//abstract methods
+    public abstract void downloadWebVersion();
+    public abstract void connectToWebService();
+    public abstract void awayWeGo();
 
-	InetAddress ipa;
-	
-	// this function provides functionality to connect to a web service
-	public ConnectionGenius(InetAddress ipa) {
-		this.ipa = ipa;
-	}
-	// the four methods
-	public void fireUpGame() {
-		//calls three other methods in order
-		downloadWebVersion();
-		connectToWebService();
-		awayWeGo();
-	}
-	/*
-	 * Hard-coded strings: The messages outputted to the console are hard-coded string and may not be suitable for 
-	 * Localisation or internationalisation*/
-	public void downloadWebVersion() {
-		//outputs messages to the console indicating that a special web
-		// version is being downloaded and to wait for a moment
-		System.out.println("Getting specialised web version.");
-		System.out.println("Wait a couple of moments");
-	}
-	
-	//outputs a message to the console indicating that the system is connecting to 
-	// the web service
-	public void connectToWebService() {
-		System.out.println("Connecting");
-	}
-	// outputs a message to the console indicating that the system is ready to play
-	public void awayWeGo() {
-		System.out.println("Ready to play");
-	}
+    // Define a static factory method named createConnectionGenius that returns an instance
+    public static ConnectionGenius createConnectionGenius(InetAddress ipa) {
+        return new FixConnectionGenius(ipa);
+    }
+    private static class FixConnectionGenius extends ConnectionGenius {
+    	//Declare a private instance variable named ipa
+        private InetAddress ipa;
+        
+        // Define a constructor that takes an instance of InetAddress as input parameter and assign it to the ipa variable
+        public FixConnectionGenius(InetAddress ipa) {
+            this.ipa = ipa;
+        }
+        // Implement the abstract method downloadWebVersion() and output messages to the console
+        @Override
+        public void downloadWebVersion() {
+            System.out.println("Getting specialised web version.");
+            System.out.println("Wait a couple of moments");
+        }
+        @Override
+        public void connectToWebService() {
+            System.out.println("Connecting");
+        }
 
+        @Override
+        public void awayWeGo() {
+            System.out.println("Ready to play");
+        }
+
+    }
 }
+
