@@ -1099,7 +1099,10 @@ public class Main {
 			case 4:
 				System.out.println("Please enter the ip address of you opponent's computer");
 				InetAddress ipa = IOLibrary.getIPAddress();
-				new ConnectionGenius(ipa).fireUpGame();
+				ConnectionGenius connectionGenius = ConnectionGenius.createConnectionGenius(ipa);
+				connectionGenius.downloadWebVersion();
+				connectionGenius.connectToWebService();
+				connectionGenius.awayWeGo();
 			}
 
 		}
