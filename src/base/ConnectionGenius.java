@@ -21,12 +21,13 @@ public abstract class ConnectionGenius {
     public abstract void downloadWebVersion();
     public abstract void connectToWebService();
     public abstract void awayWeGo();
-
+    
+    
     // Define a static factory method named createConnectionGenius that returns an instance
     public static ConnectionGenius createConnectionGenius(InetAddress ipa) {
         return new FixConnectionGenius(ipa);
     }
-    private static class FixConnectionGenius extends ConnectionGenius {
+    public static class FixConnectionGenius extends ConnectionGenius {
     	//Declare a private instance variable named ipa
         private InetAddress ipa;
         
