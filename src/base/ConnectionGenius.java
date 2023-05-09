@@ -29,7 +29,7 @@ public abstract class ConnectionGenius {
     }
     public static class FixConnectionGenius extends ConnectionGenius {
     	//Declare a private instance variable named ipa
-        private InetAddress ipa;
+        public InetAddress ipa;
         
         // Define a constructor that takes an instance of InetAddress as input parameter and assign it to the ipa variable
         public FixConnectionGenius(InetAddress ipa) {
