@@ -1,15 +1,28 @@
 package reflection;
-
 import java.lang.reflect.*;
 import java.util.*;
 
 public class Testing {
     private List<String> passedTests = new ArrayList<>();
     private List<String> failedTests = new ArrayList<>();
+    
+    
+    public static void main(String[] args) {
+        Testing test = new Testing();
+        test.runTests(SimpleMultiply.class);
+    }
+  
+    /**********************************
+     * When the runTests method attempts to invoke a method that starts with "check" using reflection,
+     *  it catches any exception that occurs while invoking the method and adds the method's name to the failedTests list.
+     *   This ensures that if a test causes an exception,
+     *    the framework will not misbehave and will record the failure in the report.
+     * @param testClass
+     */
 
-    public void runTests(Class<?> testClass) {
+    public void runTests(Class<?> testClass) { // Resilience to Expectations
         Method[] methods = testClass.getDeclaredMethods();
-        for (Method method : methods) {
+        for (Method method : methods) {  // The behaviour is 
             if (method.getName().startsWith("check")) {
                 try {
                     method.invoke(testClass.newInstance());
@@ -45,7 +58,10 @@ public class Testing {
         Field field = obj.getClass().getDeclaredField("b");
         field.setAccessible(true);
         float actual = (float) field.get(obj);
-        assertFloatsEqual(expected, actual, 0.01f);
+        assertFloatsEqual(expected, actual, 0.01f); //Simple Assertations and Reporting 
     }
+    /*
+     * The assertFloatsEqual method provides a simple assertion by checking if two float values are equal with a given epsilon.
+     *  If the assertion fails, it throws an AssertionError.*/
 }
 
