@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import base.ConnectionGenius;
 
-import org.junit.Assert;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.net.InetAddress;
 
 
