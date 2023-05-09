@@ -13,12 +13,12 @@ public class SimpleMultiply {
 	    this.b = b;
 	  }
 
-	  public void multiplyFloatA(float factor) {
-	    this.a *= factor;
+	  public void multiplyFloatA() {
+	    this.a *= this.a;
 	  }
 
-	  private void multiplyFloatB(float factor) {
-	    this.b *= factor;
+	  private void multiplyFloatB() {
+	    this.b *= this.b;
 	  }
 
 	  public float getFloatA() {
