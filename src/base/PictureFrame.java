@@ -21,7 +21,7 @@ public class PictureFrame {
 	 * ##### - LONG METHOD The DominoPanel class has multiple long methods that
 	 * perform multiple task and are difficult to understand
 	 */
-	class DominoPanel extends JPanel {
+	public class DominoPanel extends JPanel {
 		private static final long serialVersionUID = 4190229282411119364L;
 
 		private void drawGrid(Graphics g) {
@@ -123,20 +123,6 @@ public class PictureFrame {
 			g.setColor(Color.YELLOW);
 			g.fillRect(0, 0, getWidth(), getHeight());
 
-			/*
-			 * ##### - MISSING COMMENTS Some methods lack comments, making it difficult to
-			 * understand their purpose such as `numbaz` method.
-			 */
-// numbaz(g);
-//
-// if (master!=null && master.orig != null) {
-// drawRoll(g, master.orig);
-// }
-// if (reroll != null) {
-// drawReroll(g, reroll);
-// }
-//
-// drawGrid(g);
 			Location l = new Location(1, 2);
 
 			if (master.mode == 1) {

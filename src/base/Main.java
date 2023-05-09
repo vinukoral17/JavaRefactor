@@ -232,7 +232,7 @@ public class Main {
 	 * false. This can be refactored to reduce duplicated code.
 	 */
 
-	private void tryToRotateDominoAt(int x, int y) {
+	public void tryToRotateDominoAt(int x, int y) {
 	    Domino d = findDominoAt(x, y);
 	    boolean weFancyARotation = Math.random() < 0.5;
 	    if (thisIsTopLeftOfDomino(x, y, d)) {
