@@ -2,7 +2,7 @@ package reflection;
 
 public class SimpleMultiply {
 
-	  public float a = 3.5f;
+	  public float a = 3;
 	  private float b = 2.5f;
 
 	  public SimpleMultiply() {
@@ -17,7 +17,7 @@ public class SimpleMultiply {
 	    this.a *= this.a;
 	  }
 
-	  private void multiplyFloatB() {
+	  public void multiplyFloatB() {
 	    this.b *= this.b;
 	  }
 
@@ -25,7 +25,7 @@ public class SimpleMultiply {
 	    return a;
 	  }
 
-	  private void setFloatA(float a) {
+	  public void setFloatA(float a) {
 	    this.a = a;
 	  }
 
