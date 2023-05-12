@@ -122,7 +122,7 @@ public class Main {
 		}
 	}
 
-	int pg() {
+	int printGrid() {
 		for (int are = 0; are < 7; are++) {
 			for (int see = 0; see < 8; see++) {
 				if (grid[are][see] != 9) {
@@ -509,7 +509,7 @@ public class Main {
 					collateGrid();
 					break;
 				}
-				pg();
+				printGrid();
 				generateGuesses();
 				collateGuessGrid();
 				mode = 1;
@@ -561,7 +561,7 @@ public class Main {
 
 						break;
 					case 1:
-						pg();
+						printGrid();
 						break;
 					case 2:
 						printGuessGrid();
@@ -965,7 +965,7 @@ public class Main {
 
 				}
 				mode = 0;
-				pg();
+				printGrid();
 				pf.dp.repaint();
 				long now = System.currentTimeMillis();
 				try {
