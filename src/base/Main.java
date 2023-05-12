@@ -213,7 +213,7 @@ public class Main {
 	 * This should be removed or used appropriately
 	 */
 
-	private void rotateDominoes() {
+	/*private void rotateDominoes() {
 // for (Domino d : dominoes) {
 // if (Math.random() > 0.5) {
 // System.out.println("rotating " + d);
@@ -232,7 +232,7 @@ public class Main {
 	 * false. This can be refactored to reduce duplicated code.
 	 */
 
-	public void tryToRotateDominoAt(int x, int y) {
+	/*public void tryToRotateDominoAt(int x, int y) {
 	    Domino d = findDominoAt(x, y);
 	    boolean weFancyARotation = Math.random() < 0.5;
 	    if (thisIsTopLeftOfDomino(x, y, d)) {
@@ -268,7 +268,7 @@ public class Main {
 	 * `theCellBelowIsTopLeftOfHorizontalDomino` could be improved to better reflect
 	 * their purpose.
 	 */
-	private boolean theCellToTheRightIsTopLeftOfVerticalDomino(int x, int y) {
+	/*private boolean theCellToTheRightIsTopLeftOfVerticalDomino(int x, int y) {
 		Domino e = findDominoAt(x + 1, y);
 		return thisIsTopLeftOfDomino(x + 1, y, e) && !e.isDominoHorizontal();
 	}
@@ -290,7 +290,7 @@ public class Main {
 	 * criteria as an argument.
 	 */
 
-	private Domino findDominoAt(int x, int y) {
+	/*private Domino findDominoAt(int x, int y) {
 	    for (Domino d : _d) {
 	        int dominoLowX = d.lx;
 	        int dominoLowY = d.ly;
@@ -350,7 +350,7 @@ public class Main {
 
 	private void printGuesses() {
 	    printDominoList(_g);
-	}
+	}*/
 
 	/*
 	 * ##### - MAGIC NUMBER: The constant ZERO has no clear meaning. Using named
@@ -488,7 +488,6 @@ public class Main {
 					shuffleDominoesOrder();
 					placeDominoes();
 					collateGrid();
-// printGrid();
 					break;
 				case 2:
 					generateDominoes();
@@ -496,7 +495,6 @@ public class Main {
 					placeDominoes();
 					rotateDominoes();
 					collateGrid();
-// printGrid();
 					break;
 				default:
 					generateDominoes();
@@ -519,16 +517,7 @@ public class Main {
 				pf.PictureFrame(this);
 				pf.dp.repaint();
 				int c3 = -7;
-//Stop 4
-				/*
-				 * ##### - Hard-coded values: For example, the value of "ZERO" is not defined in
-				 * the code, and its use is hard-coded in multiple places.
-				 */
-				/*
-				 * #####- Lack of comments: The code lacks meaningful comments, making it
-				 * difficult to understand what is happening in the code.
-				 * 
-				 */
+	
 				while (c3 != ZERO) {
 					System.out.println();
 					String h5 = "Play menu";
@@ -546,7 +535,7 @@ public class Main {
 					System.out.println("0) Given up");
 					System.out.println("What do you want to do " + playerName + "?");
 					c3 = 9;
-// make sure the user enters something valid
+
 					while (!((c3 == 1 || c3 == 2 || c3 == 3)) && (c3 != 4) && (c3 != ZERO) && (c3 != 5) && (c3 != 6)
 							&& (c3 != 7)) {
 						try {
@@ -573,7 +562,7 @@ public class Main {
 					case 4:
 						System.out.println("Where will the top left of the domino be?");
 						System.out.println("Column?");
-// make sure the user enters something valid
+
 						int x = Location.getInt();
 						while (x < 1 || x > 8) {
 							x = Location.getInt();
@@ -595,9 +584,7 @@ public class Main {
 						boolean horiz;
 						int y2, x2;
 						Location lotion;
-						
-					//REFACTORED THE CONSOLIDATING DUPLICATED FRAGMENTS 
-						
+												
 						while ("AVFC" != "BCFC") {
 							String s3 = io.getString();
 							if (s3 != null) {
@@ -625,30 +612,20 @@ public class Main {
 						if (x2 > 7 || y2 > 6) {
 							System.out.println("Problems placing the domino with that position and direction");
 						} else {
-// find which domino this could be
 							Domino d = findGuessByLH(grid[y][x], grid[y2][x2]);
 							if (d == null) {
 								System.out.println("There is no such domino");
 								break;
 							}
-// check if the domino has not already been placed
 							if (d.placed) {
 								System.out.println("That domino has already been placed :");
 								System.out.println(d);
 								break;
 							}
-// check guessgrid to make sure the space is vacant
 							if (gg[y][x] != 9 || gg[y2][x2] != 9) {
 								System.out.println("Those coordinates are not vacant");
 								break;
 							}
-
-//Stop 5
-// if all the above is ok, call domino.place and updateGuessGrid
-							/*
-							 * ##### - NAMING CONVENTIONS: Variables such as x13, y13, gg, and lkj do not
-							 * follow standard naming conventions and make the code difficult to understand.
-							 */
 
 							gg[y][x] = grid[y][x];
 							gg[y2][x2] = grid[y2][x2];
@@ -657,10 +634,7 @@ public class Main {
 							} else {
 								d.place(x2, y2, x, y);
 							}
-							/*
-							 * ##### - HARDCODED VALUES: Hardcoded values: Values such as 9 and 1000 are
-							 * hard-coded and may not be meaningful or appropriate in different contexts.
-							 */
+							
 							score += 1000;
 							collateGuessGrid();
 							pf.dp.repaint();
@@ -668,17 +642,6 @@ public class Main {
 						break;
 					case 5:
 						System.out.println("Enter a position that the domino occupies");
-						/*
-						 * ##### - DUPLICATED CODE: Duplicate code: The code for reading the column and
-						 * row input is repeated multiple times, which makes the code longer and less
-						 * maintainable.
-						 */
-
-						/*
-						 * ##### - ERROR HANDLING The code does not properly handle exceptions that may
-						 * occur during user input, such as when the user enters a non-integer value.
-						 */
-
 						System.out.println("Column?");
 
 						int x13 = -9;
@@ -718,39 +681,6 @@ public class Main {
 						System.out.printf("%s your score is %d\n", playerName, score);
 						break;
 					case 6:
-//stop 6
-
-						/*
-						 * Duplicate code: There are many instances of code that are repeated multiple
-						 * times, such as the code that takes user input and tries to parse it into an
-						 * integer. This can be refactored into a separate method.
-						 * 
-						 * Magic numbers: The code uses many hardcoded values such as -9, -7, 0, 1, 6,
-						 * 7, 8, 500, 2000, and 10000 which might not be self-explanatory and can make
-						 * the code difficult to understand. These values should be defined as named
-						 * constants
-						 * 
-						 * 
-						 * 
-						 * Nested switch statements: The code uses nested switch statements which can
-						 * make the code hard to follow and maintain.
-						 * 
-						 * Use of negative numbers as error codes: The code uses negative numbers such
-						 * as -9 and -7 to represent error codes, which can be confusing and can lead to
-						 * bugs. Error codes should be defined as named constants.
-						 * 
-						 * Unclear variable names: Some of the variables such as 'x3', 'y3', 'yy' and
-						 * 'cf' have unclear names, making the code harder to understand. Descriptive
-						 * names should be used.
-						 * 
-						 * Hardcoded strings: Some of the strings such as "So you want to cheat, huh?"
-						 * and "Well done" are hardcoded and can be difficult to modify. These strings
-						 * should be defined as named constants or placed in a resource file.
-						 * 
-						 * No error handling: The code does not handle exceptions properly and simply
-						 * catches all exceptions without doing anything with them. This can mask
-						 * important errors and prevent debugging.
-						 */
 						System.out.println();
 						String h8 = "So you want to cheat, huh?";
 						String u8 = h8.replaceAll(".", "=");
@@ -854,45 +784,7 @@ public class Main {
 							}
 							x3--;
 							y3--;
-//Stop 9
-							/*
-							 * CODE DUPLICATION: The code in case 3 and case 4 is almost identical and can
-							 * be refactored into a separate method to avoid code duplication and improve
-							 * maintainability
-							 */
 
-							/*
-							 * MAGIC NUMBERS: Hard-coded values such as 6 and 7 can make the code difficult
-							 * to understand and change. Consider using named constants instead.
-							 */
-
-							/*
-							 * INCONSISTENT NAMING CONVENTIONS: The naming conventions used in the code are
-							 * inconsistent, for example, variables x3 and y3 are camelCase, whereas h4 and
-							 * u4 are in PascalCase.
-							 */
-
-							/*
-							 * POORLY NAMED VARIABLES :Variables such as lkj2 and grid are not descriptive
-							 * and do not clearly convey their purpose.
-							 */
-
-							/*
-							 * Overuse of abbreviations: Variables such as hd and vd are abbreviations that
-							 * are not immediately recognisable, consider using more descriptive names.
-							 */
-
-							/*
-							 * Overuse of comments: There are several comments in the code that do not
-							 * provide any additional information, and some comments contain outdated or
-							 * incorrect information, such as the comment for the catch block that says //
-							 * TODO Auto-generated catch block.
-							 */
-							/*
-							 * EXCEPTION HANDLING: The code catches an InterruptedException but does not do
-							 * anything with it, consider either removing the exception handling or taking
-							 * appropriate action when the exception is thrown
-							 */
 							Domino lkj2 = findDominoAt(x3, y3);
 							System.out.println(lkj2);
 							break;
@@ -992,33 +884,6 @@ public class Main {
 				System.out.println(u4);
 				System.out.println(h4);
 				System.out.println(u4);
-//Stop10
-
-				/*
-				 * Ignoring Exception Handling: The code uses a broad Exception catch block to
-				 * catch all possible exceptions, which is a poor practice as it does not
-				 * provide any information about the type of exception that was thrown.
-				 */
-
-				/*
-				 * Use of System.exit(): The code uses System.exit(0) in the catch block, which
-				 * stops the whole application abruptly without any proper error handling.
-				 */
-
-				/*
-				 * Unused Code: There is a break statement outside of any switch case statement.
-				 */
-
-				/*
-				 * Poor Naming Conventions: Some of the variable names used in the code, such as
-				 * "f", "pw", "n", "lin", "parts", "ft", "r", "h4", "u4", "w" are not
-				 * descriptive and do not provide any context about their purpose.
-				 */
-
-				/*
-				 * Unused Variables: There are variables such as n and u4 that are declared but
-				 * never used.
-				 */
 				File f = new File("score.txt");
 				if (!(f.exists() && f.isFile() && f.canRead())) {
 					System.out.println("Creating new score table");
@@ -1108,35 +973,6 @@ public class Main {
 		}
 
 	}
-
-//////
-	/*
-	 * Hardcoded values: The file name "score.txt" and the exception message
-	 * "Something went wrong saving scores" are hardcoded and may need to be changed
-	 * in the future.
-	 */
-
-	/*
-	 * Magic numbers: The expression 32 & 16 in the gecko method appears to be a
-	 * magic number and may not be easily understandable.
-	 */
-
-	/*
-	 * Inefficient recursion: The gecko method uses recursion which can be
-	 * inefficient and lead to stack overflow issues.
-	 */
-
-	/*
-	 * Unclear method names: The methods recordTheScore, drawDominoes, gecko, and
-	 * drawGuesses do not have clear, descriptive names that accurately reflect what
-	 * they do.
-	 */
-
-	/*
-	 * Poor error handling: The catch block in the recordTheScore method only prints
-	 * a generic error message, making it difficult to debug issues that may arise.
-	 */
-
 	/*
 	 * Undescriptive variable names: The variable names _d and _g do not provide any
 	 * information about what they represent.
