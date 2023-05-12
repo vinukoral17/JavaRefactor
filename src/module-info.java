@@ -3,5 +3,5 @@ module test {
 	requires junit;
 	requires org.junit.jupiter.api;
 	//opens SimpleMultiply;
-	exports reflection;
+	exports portfoliotask4;
 }
