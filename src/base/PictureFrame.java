@@ -15,8 +15,8 @@ import javax.swing.*;
 
 public class PictureFrame {
 	public int[] reroll = null;
-	public Main master = null;
-
+	public Game master = null;
+	public Main grd = null;
 	/*
 	 * ##### - LONG METHOD The DominoPanel class has multiple long methods that
 	 * perform multiple task and are difficult to understand
@@ -36,17 +36,11 @@ public class PictureFrame {
 		    int x = 30 + col * 20;
 		    int y = 30 + row * 20;
 		    int diameter = 20;
-		    int n = master.grid[row][col];
+		    int n = grd.grid[row][col];
 		    drawDigitGivenCentre(g, x, y, diameter, n);
 		}
 
-		/*
-		 * ##### - POOR NAMING CONVENTIONS
-		 * 
-		 * The names of some variables and methods are not descriptive enough to
-		 * understand their purpose (reroll, see, are, drawDigitGivenCentre,
-		 * fillDigitGivenCentre).
-		 */
+		
 		public void drawHeadings(Graphics g) {
 		    RowOfDigits row1 = new RowOfDigits(10, 30, 7, 20, 1);
 		    RowOfDigits row2 = new RowOfDigits(30, 10, 8, 20, 1);
@@ -62,13 +56,6 @@ public class PictureFrame {
 		    }
 		}
 
-		/*
-		 * ##### - HARDCODED VALUES
-		 * 
-		 * Some values such as colors (Color.WHITE, Color.RED, Color.BLUE, Color.GREEN,
-		 * Color.BLACK, Color.YELLOW) are hardcoded and make the code difficult to
-		 * maintain.
-		 */
 		public void drawDomino(Graphics g, Domino d, DominoValues dv) {
 			if (d.placed) {
 				int y = Math.min(d.ly, d.hy);
@@ -86,15 +73,8 @@ public class PictureFrame {
 
 		void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n) {
 			int radius = diameter / 2;
-			g.setColor(Color.BLACK);
-			/*
-			 * ##### - UNUSED CODE The commented-out lines of code (g.drawOval and
-			 * g.fillOval) indicate that the code is not being used and should be removed
-			 */
-
-// g.drawOval(x - radius, y - radius, diameter, diameter);
+			
 			FontMetrics fm = g.getFontMetrics();
-// convert the string to an integer
 			String txt = Integer.toString(n);
 			g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
 		}
@@ -102,7 +82,6 @@ public class PictureFrame {
 		void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n, Color c) { // Long parameter list
 			int radius = diameter / 2;
 			g.setColor(c);
-// g.drawOval(x - radius, y - radius, diameter, diameter);
 			FontMetrics fm = g.getFontMetrics();
 			String txt = Integer.toString(n);
 			g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
@@ -140,14 +119,13 @@ public class PictureFrame {
 		}
 
 		public Dimension getPreferredSize() {
-// the application window always prefers to be 202x182
 			return new Dimension(202, 182);
 		}
 	}
 
 	public DominoPanel dp;
 
-	public void PictureFrame(Main sf) {
+	public void PictureFrame(Game sf) {
 		master = sf;
 		if (dp == null) {
 			JFrame f = new JFrame("Abominodo");
@@ -160,7 +138,6 @@ public class PictureFrame {
 	}
 
 	public void reset() {
-// TODO Auto-generated method stub
 
 	}
 
