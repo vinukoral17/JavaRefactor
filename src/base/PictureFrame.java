@@ -1,9 +1,5 @@
 package base;
 
-/*###### - UNUSED IMPORTS 
- * The java.awt.* import is not being used and should be removed.
- * 
- * */
 import java.awt.*;
 
 import javax.swing.*;
@@ -37,7 +33,7 @@ public class PictureFrame {
 		    int y = 30 + row * 20;
 		    int diameter = 20;
 		    int n = master.grid[row][col];
-		    drawDigitGivenCentre(g, x, y, diameter, n);
+		    drawDigitGivenCentre(g, new Measurement(x, y, diameter), n);
 		}
 
 		
@@ -51,51 +47,44 @@ public class PictureFrame {
 
 		private void drawRowOfDigits(Graphics g, RowOfDigits row) {
 		    for (int i = 0; i < row.getCount(); i++) {
-		        fillDigitGivenCentre(g, row.getNum1() + i * row.getSpacing(), 
-		            row.getNum2() + i * row.getSpacing(), 20, row.getInitialDigit() + i);
+		        fillDigitGivenCentre(g, new Measurement(row.getNum1() + i * row.getSpacing(),
+		            row.getNum2() + i * row.getSpacing(), 20), row.getInitialDigit() + i);
 		    }
 		}
 
 		public void drawDomino(Graphics g, Domino d, DominoValues dv) {
-			if (d.placed) {
-				int y = Math.min(d.ly, d.hy);
-				int x = Math.min(d.lx, d.hx);
-				int w = Math.abs(d.lx - d.hx) + 1;
-				int h = Math.abs(d.ly - d.hy) + 1;
-				g.setColor(Color.WHITE);
-				g.fillRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
-				g.setColor(Color.RED);
-				g.drawRect(20 + x * 20, 20 + y * 20, w * 20, h * 20);
-				drawDigitGivenCentre(g, 30 + d.hx * 20, 30 + d.hy * 20, 20, dv.high, Color.BLUE);
-				drawDigitGivenCentre(g, 30 + d.lx * 20, 30 + d.ly * 20, 20, dv.low, Color.BLUE);
-			}
+		    if (d.placed) {
+		        int y = Math.min(d.ly, d.hy);
+		        int x = Math.min(d.lx, d.hx);
+		        int w = Math.abs(d.lx - d.hx) + 1;
+		        Measurement dominoCircle = new Measurement(20 + x * 20, 20 + y * 20, w * 20);
+		        g.setColor(Color.WHITE);
+		        g.fillRect(dominoCircle.getX(), dominoCircle.getY(), dominoCircle.getDiameter(), dominoCircle.getDiameter());
+		        g.setColor(Color.RED);
+		        g.drawRect(dominoCircle.getX(), dominoCircle.getY(), dominoCircle.getDiameter(), dominoCircle.getDiameter());
+		        drawDigitGivenCentre(g, new Measurement(30 + d.hx * 20, 30 + d.hy * 20, 20), dv.high, Color.BLUE);
+		        drawDigitGivenCentre(g, new Measurement(30 + d.lx * 20, 30 + d.ly * 20, 20), dv.low, Color.BLUE);
+		    }
 		}
 
-		void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n) {
-			int radius = diameter / 2;
-			
-			FontMetrics fm = g.getFontMetrics();
-			String txt = Integer.toString(n);
-			g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
+		void drawDigitGivenCentre(Graphics g, Measurement size, int n) {
+		    FontMetrics fm = g.getFontMetrics();
+		    String txt = Integer.toString(n);
+		    g.drawString(txt, size.getCenterX() - fm.stringWidth(txt) / 2,
+		        size.getCenterY() + fm.getMaxAscent() / 2);
 		}
 
-		void drawDigitGivenCentre(Graphics g, int x, int y, int diameter, int n, Color c) { // Long parameter list
-			int radius = diameter / 2;
-			g.setColor(c);
-			FontMetrics fm = g.getFontMetrics();
-			String txt = Integer.toString(n);
-			g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
+		void drawDigitGivenCentre(Graphics g, Measurement size, int n, Color c) {
+		    g.setColor(c);
+		    drawDigitGivenCentre(g, size, n);
 		}
 
-		void fillDigitGivenCentre(Graphics g, int x, int y, int diameter, int n) {
-			int radius = diameter / 2;
-			g.setColor(Color.GREEN);
-			g.fillOval(x - radius, y - radius, diameter, diameter);
-			g.setColor(Color.BLACK);
-			g.drawOval(x - radius, y - radius, diameter, diameter);
-			FontMetrics fm = g.getFontMetrics();
-			String txt = Integer.toString(n);
-			g.drawString(txt, x - fm.stringWidth(txt) / 2, y + fm.getMaxAscent() / 2);
+		void fillDigitGivenCentre(Graphics g, Measurement size, int n) {
+		    g.setColor(Color.GREEN);
+		    g.fillOval(size.getX(), size.getY(), size.getDiameter(), size.getDiameter());
+		    g.setColor(Color.BLACK);
+		    g.drawOval(size.getX(), size.getY(), size.getDiameter(), size.getDiameter());
+		    drawDigitGivenCentre(g, size, n);
 		}
 
 		protected void paintComponent(Graphics g) {

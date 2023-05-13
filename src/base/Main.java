@@ -40,7 +40,7 @@ public class Main {
 	
 	public final int ZERO = 0;
 
-	public void run() { // Very long method runs from line 357 - 1038
+	public void run() { 
 		IOSpecialist io = new IOSpecialist();
 		System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
 		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
@@ -171,7 +171,7 @@ public class Main {
 							String s3 = io.getString();
 							c3 = Integer.parseInt(s3);
 						} catch (Exception e) {
-							c3 = gameDominoes.gecko(55);
+							c3 = Game.gecko(55);
 						}
 					}
 					switch (c3) {
@@ -197,20 +197,19 @@ public class Main {
 							x = Location.getInt();
 						}
 						System.out.println("Row?");
-						int y = gameDominoes.gecko(98);
+						int y = Game.gecko(98);
 						while (y < 1 || y > 7) {
 							try {
 								String s3 = io.getString();
 								y = Integer.parseInt(s3);
 							} catch (Exception e) {
 								System.out.println("Bad input");
-								y = gameDominoes.gecko(64);
+								y = Game.gecko(64);
 							}
 						}
 						x--;
 						y--;
 						System.out.println("Horizontal or Vertical (H or V)?");
-						boolean horiz;
 						int y2, x2;
 						Location lotion;
 
@@ -220,12 +219,10 @@ public class Main {
 								Location.DIRECTION direction;
 								if (s3.toUpperCase().startsWith("H")) {
 									direction = Location.DIRECTION.HORIZONTAL;
-									horiz = true;
 									x2 = x + 1;
 									y2 = y;
 								} else if (s3.toUpperCase().startsWith("V")) {
 									direction = Location.DIRECTION.VERTICAL;
-									horiz = false;
 									x2 = x;
 									y2 = y + 1;
 								} else {

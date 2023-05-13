@@ -1,10 +1,9 @@
 package base;
 
 public class Measurement {
-
-    private final int x;
-    private final int y;
-    private final int diameter;
+    private int x;
+    private int y;
+    private int diameter;
 
     public Measurement(int x, int y, int diameter) {
         this.x = x;
@@ -26,5 +25,13 @@ public class Measurement {
 
     public int getRadius() {
         return diameter / 2;
+    }
+
+    public int getCenterX() {
+        return x + getRadius();
+    }
+
+    public int getCenterY() {
+        return y + getRadius();
     }
 }
