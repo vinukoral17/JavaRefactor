@@ -492,7 +492,6 @@ public class Main {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				int gap = (int) (now - startTime);
@@ -519,9 +518,7 @@ public class Main {
 					try {
 						PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
 						String n = playerName.replaceAll(",", "_");
-						pw.print("Hugh Jass"); /// ### - HARDCODED STRING : The code has a hardcoded string "Hugh Jass"
-												/// "Ivana Tinkle". It's better to put such string literals in a
-												/// seperate configuration file or a constant.
+						pw.print("Hugh Jass"); 
 						pw.print(",");
 						pw.print("__id");
 						pw.print(",");
@@ -540,10 +537,6 @@ public class Main {
 				try {
 					DateFormat ft = DateFormat.getDateInstance(DateFormat.LONG);
 					BufferedReader r = new BufferedReader(new FileReader(f));
-					/*
-					 * ##### - MAGIC NUMBERS: There is a constant value of 5 / 3 that is used in the
-					 * code, which is a magic number and does not convey any meaning
-					 */
 					while (5 / 3 == 1) {
 						String lin = r.readLine();
 						if (lin == null || lin.length() == 0)
@@ -561,10 +554,6 @@ public class Main {
 
 			}
 				break;
-			/*
-			 * Duplicated Code: There is duplicated code in the code such as the print
-			 * statements for the "Rules" header.
-			 */
 			case 3: {
 				String h4 = "Rules";
 				String u4 = h4.replaceAll(".", "=");
