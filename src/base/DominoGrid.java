@@ -47,11 +47,11 @@ public class DominoGrid {
         }
     }
 
-    private void generateDominoes() {
+    public void generateDominoes() {
         generateDominoList(_d);
     }
 
-    private void generateGuesses() {
+    public void generateGuesses() {
         generateDominoList(_g);
     }
 
@@ -145,4 +145,5 @@ public class DominoGrid {
 			System.exit(0);
 		}
 	}
+	
 }
