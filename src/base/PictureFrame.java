@@ -15,8 +15,8 @@ import javax.swing.*;
 
 public class PictureFrame {
 	public int[] reroll = null;
-	public Game master = null;
-	public Main grd = null;
+	public Main master = null;
+	public Game grd = null;
 	/*
 	 * ##### - LONG METHOD The DominoPanel class has multiple long methods that
 	 * perform multiple task and are difficult to understand
@@ -36,7 +36,7 @@ public class PictureFrame {
 		    int x = 30 + col * 20;
 		    int y = 30 + row * 20;
 		    int diameter = 20;
-		    int n = grd.grid[row][col];
+		    int n = master.grid[row][col];
 		    drawDigitGivenCentre(g, x, y, diameter, n);
 		}
 
@@ -108,13 +108,13 @@ public class PictureFrame {
 				l.drawGridLines(g);
 				drawHeadings(g);
 				drawGrid(g);
-				master.drawGuesses(g);
+				grd.drawGuesses(g);
 			}
 			if (master.mode == 0) {
 				l.drawGridLines(g);
 				drawHeadings(g);
 				drawGrid(g);
-				master.drawDominoes(g);
+				grd.drawDominoes(g);
 			}
 		}
 
@@ -125,8 +125,8 @@ public class PictureFrame {
 
 	public DominoPanel dp;
 
-	public void PictureFrame(Game sf) {
-		master = sf;
+	public void PictureFrame(Main main) {
+		master = main;
 		if (dp == null) {
 			JFrame f = new JFrame("Abominodo");
 			dp = new DominoPanel();

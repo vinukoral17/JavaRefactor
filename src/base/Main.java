@@ -1,15 +1,5 @@
 package base;
 
-/* ##### - CODE COMPLEXITY: The code has a high level of complexity, making it difficult to understand and maintain. 
- * This can be reduced by breaking the code into smaller, more manageable functions
- * */
-
-/*
- * ##### - LACK OF DOCUMENTATION:
- * The code does not have any documentation, 
- * making it difficult for someone unfamiliar with it to understand its purpose and behaviour.
- * */
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.*;
@@ -25,13 +15,7 @@ import javax.swing.JScrollPane;
  * @author Kevan Buckley, maintained by __student
  * @version 2.0, 2014
  */
-/*
- * ##### - NAMING CONVENTIONS: The names of the variable, methods, and classes
- * do not follow standard naming conventions. For example, variable names should
- * start with a lowercase letter and use camelCase, method names should be in
- * camelCase and class names should start with an uppercase letter and use
- * CamelCase
- */
+
 
 public class Main {
 
@@ -45,201 +29,27 @@ public class Main {
 	int score;
 	long startTime;
 	DominoValues values;
-
+	
 	PictureFrame pf = new PictureFrame();
+	DominoGrid gDominoes = new DominoGrid();
+	DominoHelper hDominoes = new DominoHelper(_d, _d);
+	RotateDominos rDominoes = new RotateDominos(_d);
+	Game gameDominoes = new Game(playerName, 0, _d, _d, null);
+	DominoHelper dominohelp = new DominoHelper(_d, _d);
 
-	/*
-	 * ##### DUPLIATED CODE: The `generateDomino()` and `generateGuesses()` methods
-	 * are very similar. It would be better to extract the common part into a
-	 * separate method and call that method from both methods
-	 */
-	/* Consolidate Duplicate Fragment Fixed */
-
-	private void generateDominoList(List<Domino> list) {
-		int count = 0;
-		int x = 0;
-		int y = 0;
-		for (int l = 0; l <= 6; l++) {
-			for (int h = l; h <= 6; h++) {
-				Domino d = new Domino(h, l);
-				list.add(d);
-				if (list == _d) {
-					d.place(x, y, x + 1, y);
-					x += 2;
-					if (x > 6) {
-						x = 0;
-						y++;
-					}
-				}
-				count++;
-			}
-		}
-		if (count != 28) {
-			System.out.println("something went wrong generating dominoes");
-			System.exit(0);
-		}
-	}
-
-	private void generateDominoes() {
-		_d = new LinkedList<Domino>();
-		generateDominoList(_d);
-	}
-
-	private void generateGuesses() {
-		_g = new LinkedList<Domino>();
-		generateDominoList(_g);
-	}
-	/*
-	 * ##### - INEFFICIENT ALGORITHMS: The `collateGrid()` and `collateGuessGrid()`
-	 * methods have nested for loops that traverse the entire `_d` and `_g`
-	 * collections, which coud be inefficient for large collections. A more
-	 * efficient algorithm could be used.
-	 */
-
-	void collateGrid() {
-		for (Domino d : _d ) {
-			if (!d.placed) {
-				grid[d.hy][d.hx] = 9;
-				grid[d.ly][d.lx] = 9;
-			} else {
-				grid[d.hy][d.hx] = d.values.high;
-				grid[d.ly][d.lx] = d.values.low;
-			}
-		}
-	}
-
-	void collateGuessGrid() {
-		for (int r = 0; r < 7; r++) {
-			for (int c = 0; c < 8; c++) {
-				gg[r][c] = 9;
-			}
-		}
-		for (Domino d : _g) {
-			if (d.placed) {
-				gg[d.hy][d.hx] = d.values.high;
-				gg[d.ly][d.lx] = d.values.low;
-			}
-		}
-	}
-
-	int printGrid() {
-		for (int are = 0; are < 7; are++) {
-			for (int see = 0; see < 8; see++) {
-				if (grid[are][see] != 9) {
-					System.out.printf("%d", grid[are][see]);
-				} else {
-					System.out.print(".");
-				}
-			}
-			System.out.println();
-		}
-		return 11;
-	}
-
-	int printGuessGrid() {
-		for (int are = 0; are < 7; are++) {
-			for (int see = 0; see < 8; see++) {
-				if (gg[are][see] != 9) {
-					System.out.printf("%d", gg[are][see]);
-				} else {
-					System.out.print(".");
-				}
-			}
-			System.out.println();
-		}
-		return 11;
-	}
-
-	private void shuffleDominoesOrder() {
-		List<Domino> shuffled = new LinkedList<Domino>();
-
-		while (_d.size() > 0) {
-			int n = (int) (Math.random() * _d.size());
-			shuffled.add(_d.get(n));
-			_d.remove(n);
-		}
-
-		_d = shuffled;
-	}
-//
-
-	/*
-	 * Naming Conventions: The names of the functions and variable are not clear and
-	 * do not follow proper naming conventions. For example : `invertSomeDominoes`
-	 * doesn't clearly state what it does, and `weFancyARotation` is not a
-	 * descriptive name
-	 */
-
-	private void invertSomeDominoes() {
-		for (Domino d : _d) {
-			if (Math.random() > 0.5) {
-				d.invert();
-			}
-		}
-	}
-	/*
-	 * ##### - ERROR HANDLING If the value `count` is not equal to 28 the code will
-	 * exit without any error message or handling, making it difficult to determine
-	 * the cause of the problem
-	 */
-
-	private void placeDominoes() {
-		int x = 0;
-		int y = 0;
-		int count = 0;
-		for (Domino d : _d) {
-			count++;
-			d.place(x, y, x + 1, y);
-			x += 2;
-			if (x > 6) {
-				x = 0;
-				y++;
-			}
-		}
-		if (count != 28) {
-			System.out.println("something went wrong generating dominoes");
-			System.exit(0);
-		}
-	}
+	
 	public final int ZERO = 0;
 
 	public void run() { // Very long method runs from line 357 - 1038
 		IOSpecialist io = new IOSpecialist();
-
-		/*
-		 * ##### - UNUSED CODE: The commented-out code unused, making it difficult to
-		 * understand the intended behaviour of the code. This should be removed or used
-		 * appropriately
-		 */
 		System.out.println("Welcome To Abominodo - The Best Dominoes Puzzle Game in the Universe");
 		System.out.println("Version 2.1 (c), Kevan Buckley, 2014");
-//    System.out.println("Serial number " + Special.getStamp());
-
 		System.out.println();
 		System.out.println(MultiLingualStringTable.getMessage(0));
 		playerName = io.getString();
 
 		System.out.printf("%s %s. %s", MultiLingualStringTable.getMessage(1), playerName,
 				MultiLingualStringTable.getMessage(2));
-//Stop 3
-
-		/*
-		 * ##### - NAMING: The variable names used in this code such as "$", "h1", "u1",
-		 * "s1", "index", "c2", "c3", etc., are not descriptive and do not give any
-		 * meaningful information about the purpose of the variables.
-		 * 
-		 */
-		/*
-		 * ##### - DUPLICATION: The code that create a string with '=' and prints it
-		 * three times to create a visual separator is duplicated multiple times in the
-		 * code
-		 * 
-		 */
-		/*
-		 * ##### - POOR ERROR HANDLING: The code does not handle exceptions in a
-		 * meaningful way and simply sets the value of "$" to -9, which can lead to
-		 * unexpected behaviour.
-		 **/
 		int newnumber = -9;
 		while (newnumber != ZERO) { // ##################################################################### THIS
 									// WHILE LOOP ENDS AT LINE 1036
@@ -250,30 +60,10 @@ public class Main {
 			System.out.println(h1);
 			System.out.println(u1);
 			System.out.println("1) Play");
-// System.out.println("1) Single player play");    // ##### - UNUSED CODE
 			System.out.println("2) View high scores");
 			System.out.println("3) View rules");
-// System.out.println("4) Multiplayer play");		//##### - UNUSED CODE
 			System.out.println("5) Get inspiration");
 			System.out.println("0) Quit");
-
-			/*
-			 * ##### - MAGIC NUMBERS: The code uses several magic numbers, such as -9, 0,
-			 * -7, which do not have clear meaning and can make the code difficult to
-			 * understand.
-			 *
-			 **/
-
-			/*
-			 * ##### - INDENTATION: the code is not indented properly
-			 */
-
-			/*
-			 * ##### - LACK OF MODULARITY: The code has a large switch statement with
-			 * multiple cases that are not organised into separate functions or classes,
-			 * which makes the code difficult to maintain and test.
-			 * 
-			 */
 
 			newnumber = -9;
 			while (newnumber == -9) {
@@ -303,10 +93,6 @@ public class Main {
 				break;
 			}
 			case 1: {
-				/*
-				 * ##### - DUPLICATED CODE The same duplication is present when creating the
-				 * string "SELECT DIFFICULTY"
-				 */
 				System.out.println();
 				String h4 = "Select difficulty";
 				String u4 = h4.replaceAll(".", "=");
@@ -327,32 +113,32 @@ public class Main {
 				}
 				switch (c2) {
 				case 1:
-					generateDominoes();
-					shuffleDominoesOrder();
-					placeDominoes();
-					collateGrid();
+					gDominoes.generateDominoes();
+					gDominoes.shuffleDominoesOrder();
+					gDominoes.placeDominoes();
+					gDominoes.collateGrid();
 					break;
 				case 2:
-					generateDominoes();
-					shuffleDominoesOrder();
-					placeDominoes();
-					rotateDominoes();
-					collateGrid();
+					gDominoes.generateDominoes();
+					gDominoes.shuffleDominoesOrder();
+					gDominoes.placeDominoes();
+					rDominoes.rotateDominoes();
+					gDominoes.collateGrid();
 					break;
 				default:
-					generateDominoes();
-					shuffleDominoesOrder();
-					placeDominoes();
-					rotateDominoes();// ##### - Repeated Functions
-					rotateDominoes(); // ##### - Repeated Functions
-					rotateDominoes();// ##### - Repeated Functions
-					invertSomeDominoes();
-					collateGrid();
+					gDominoes.generateDominoes();
+					gDominoes.shuffleDominoesOrder();
+					gDominoes.placeDominoes();
+					rDominoes.rotateDominoes();// ##### - Repeated Functions
+					rDominoes.rotateDominoes(); // ##### - Repeated Functions
+					rDominoes.rotateDominoes();// ##### - Repeated Functions
+					gDominoes.invertSomeDominoes();
+					gDominoes.collateGrid();
 					break;
 				}
-				printGrid();
-				generateGuesses();
-				collateGuessGrid();
+				gDominoes.printGrid();
+				gDominoes.generateGuesses();
+				gDominoes.collateGuessGrid();
 				mode = 1;
 				cf = 0;
 				score = 0;
@@ -360,7 +146,7 @@ public class Main {
 				pf.PictureFrame(this);
 				pf.dp.repaint();
 				int c3 = -7;
-	
+
 				while (c3 != ZERO) {
 					System.out.println();
 					String h5 = "Play menu";
@@ -385,7 +171,7 @@ public class Main {
 							String s3 = io.getString();
 							c3 = Integer.parseInt(s3);
 						} catch (Exception e) {
-							c3 = gecko(55);
+							c3 = gameDominoes.gecko(55);
 						}
 					}
 					switch (c3) {
@@ -393,14 +179,14 @@ public class Main {
 
 						break;
 					case 1:
-						printGrid();
+						gDominoes.printGrid();
 						break;
 					case 2:
-						printGuessGrid();
+						gDominoes.printGuessGrid();
 						break;
 					case 3:
 						Collections.sort(_g);
-						printGuesses();
+						dominohelp.printGuesses();
 						break;
 					case 4:
 						System.out.println("Where will the top left of the domino be?");
@@ -411,14 +197,14 @@ public class Main {
 							x = Location.getInt();
 						}
 						System.out.println("Row?");
-						int y = gecko(98);
+						int y = gameDominoes.gecko(98);
 						while (y < 1 || y > 7) {
 							try {
 								String s3 = io.getString();
 								y = Integer.parseInt(s3);
 							} catch (Exception e) {
 								System.out.println("Bad input");
-								y = gecko(64);
+								y = gameDominoes.gecko(64);
 							}
 						}
 						x--;
@@ -427,7 +213,7 @@ public class Main {
 						boolean horiz;
 						int y2, x2;
 						Location lotion;
-												
+
 						while ("AVFC" != "BCFC") {
 							String s3 = io.getString();
 							if (s3 != null) {
@@ -455,7 +241,7 @@ public class Main {
 						if (x2 > 7 || y2 > 6) {
 							System.out.println("Problems placing the domino with that position and direction");
 						} else {
-							Domino d = findGuessByLH(grid[y][x], grid[y2][x2]);
+							Domino d = dominohelp.findGuessByLH(grid[y][x], grid[y2][x2]);
 							if (d == null) {
 								System.out.println("There is no such domino");
 								break;
@@ -477,9 +263,9 @@ public class Main {
 							} else {
 								d.place(x2, y2, x, y);
 							}
-							
+
 							score += 1000;
-							collateGuessGrid();
+							gDominoes.collateGuessGrid();
 							pf.dp.repaint();
 						}
 						break;
@@ -508,7 +294,7 @@ public class Main {
 						}
 						x13--;
 						y13--;
-						Domino lkj = findGuessAt(x13, y13);
+						Domino lkj = dominohelp.findGuessAt(x13, y13);
 						if (lkj == null) {
 							System.out.println("Couln't find a domino there");
 						} else {
@@ -516,7 +302,7 @@ public class Main {
 							gg[lkj.hy][lkj.hx] = 9;
 							gg[lkj.ly][lkj.lx] = 9;
 							score -= 1000;
-							collateGuessGrid();
+							gDominoes.collateGuessGrid();
 							pf.dp.repaint();
 						}
 						break;
@@ -598,7 +384,7 @@ public class Main {
 									x5 = -7;
 								}
 							}
-							Domino dd = findDominoByLH(x5, x4);
+							Domino dd = dominohelp.findDominoByLH(x5, x4);
 							System.out.println(dd);
 
 							break;
@@ -628,7 +414,7 @@ public class Main {
 							x3--;
 							y3--;
 
-							Domino lkj2 = findDominoAt(x3, y3);
+							Domino lkj2 = dominohelp.findDominoAt(x3, y3);
 							System.out.println(lkj2);
 							break;
 
@@ -637,8 +423,8 @@ public class Main {
 							HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
 							for (int r = 0; r < 6; r++) {
 								for (int c = 0; c < 7; c++) {
-									Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-									Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+									Domino hd = dominohelp.findGuessByLH(grid[r][c], grid[r][c + 1]);
+									Domino vd = dominohelp.findGuessByLH(grid[r][c], grid[r + 1][c]);
 									List<Location> l = map.get(hd);
 									if (l == null) {
 										l = new LinkedList<Location>();
@@ -669,8 +455,8 @@ public class Main {
 							HashMap<Domino, List<Location>> map = new HashMap<Domino, List<Location>>();
 							for (int r = 0; r < 6; r++) {
 								for (int c = 0; c < 7; c++) {
-									Domino hd = findGuessByLH(grid[r][c], grid[r][c + 1]);
-									Domino vd = findGuessByLH(grid[r][c], grid[r + 1][c]);
+									Domino hd = dominohelp.findGuessByLH(grid[r][c], grid[r][c + 1]);
+									Domino vd = dominohelp.findGuessByLH(grid[r][c], grid[r + 1][c]);
 									List<Location> l = map.get(hd);
 									if (l == null) {
 										l = new LinkedList<Location>();
@@ -700,7 +486,7 @@ public class Main {
 
 				}
 				mode = 0;
-				printGrid();
+				gDominoes.printGrid();
 				pf.dp.repaint();
 				long now = System.currentTimeMillis();
 				try {
@@ -712,11 +498,11 @@ public class Main {
 				int gap = (int) (now - startTime);
 				int bonus = 60000 - gap;
 				score += bonus > 0 ? bonus / 1000 : 0;
-				recordTheScore();
+				gameDominoes.recordTheScore();
 				System.out.println("Here is the solution:");
 				System.out.println();
 				Collections.sort(_d);
-				printDominoes();
+				hDominoes.printDominoes();
 				System.out.println("you scored " + score);
 
 			}
@@ -816,52 +602,10 @@ public class Main {
 		}
 
 	}
-	/*
-	 * Undescriptive variable names: The variable names _d and _g do not provide any
-	 * information about what they represent.
-	 */
-	private void recordTheScore() {
-		try {
-			PrintWriter pw = new PrintWriter(new FileWriter("score.txt", true));
-			String n = playerName.replaceAll(",", "_");
-			pw.print(n);
-			pw.print(",");
-			pw.print(score);
-			pw.print(",");
-			pw.println(System.currentTimeMillis());
-			pw.flush();
-			pw.close();
-		} catch (Exception e) {
-			System.out.println("Something went wrong saving scores");
-		}
-	}
 
 	public static void main(String[] args) {
 		new Main().run();
 	}
 
-	public void drawDominoes(Graphics g) {
-		for (Domino d : _d) {
-			pf.dp.drawDomino(g, d,values);
-		}
-	}
 
-	public static int gecko(int UnderScore) {
-		if (UnderScore == (32 & 16)) {
-			return -7;
-		} else {
-			if (UnderScore < 0) {
-				return gecko(UnderScore + 1 | 0);
-			} else {
-				return gecko(UnderScore - 1 | 0);
-			}
-		}
-	}
-
-	public void drawGuesses(Graphics g) {
-		for (Domino d : _g) {
-			pf.dp.drawDomino(g, d,values);
-		}
-	}
-//__id
 }

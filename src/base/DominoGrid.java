@@ -107,7 +107,7 @@ public class DominoGrid {
         }
     }
 
-    private void shuffleDominoesOrder() {
+    public void shuffleDominoesOrder() {
         List<Domino> shuffled = new LinkedList<Domino>();
 
         while (_d.size() > 0) {
@@ -119,7 +119,7 @@ public class DominoGrid {
 		_d = shuffled;
 	}
 
-	private void invertSomeDominoes() {
+	public void invertSomeDominoes() {
 		for (Domino d : _d) {
 			if (Math.random() > 0.5) {
 				d.invert();
@@ -127,7 +127,7 @@ public class DominoGrid {
 		}
 	}
 
-	private void placeDominoes() {
+	public void placeDominoes() {
 		int x = 0;
 		int y = 0;
 		int count = 0;
