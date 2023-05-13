@@ -113,28 +113,19 @@ public class Main {
 				}
 				switch (c2) {
 				case 1:
-					gDominoes.generateDominoes();
-					gDominoes.shuffleDominoesOrder();
-					gDominoes.placeDominoes();
-					gDominoes.collateGrid();
-					break;
+					setupDominoes();
+				    break;
 				case 2:
-					gDominoes.generateDominoes();
-					gDominoes.shuffleDominoesOrder();
-					gDominoes.placeDominoes();
-					rDominoes.rotateDominoes();
-					gDominoes.collateGrid();
-					break;
+					setupDominoes();
+				    rDominoes.rotateDominoes();
+				    break;
 				default:
-					gDominoes.generateDominoes();
-					gDominoes.shuffleDominoesOrder();
-					gDominoes.placeDominoes();
-					rDominoes.rotateDominoes();// ##### - Repeated Functions
-					rDominoes.rotateDominoes(); // ##### - Repeated Functions
-					rDominoes.rotateDominoes();// ##### - Repeated Functions
-					gDominoes.invertSomeDominoes();
-					gDominoes.collateGrid();
-					break;
+					setupDominoes();
+				    rDominoes.rotateDominoes();
+				    rDominoes.rotateDominoes();
+				    rDominoes.rotateDominoes();
+				    gDominoes.invertSomeDominoes();
+				    break;
 				}
 				gDominoes.printGrid();
 				gDominoes.generateGuesses();
@@ -146,7 +137,6 @@ public class Main {
 				pf.PictureFrame(this);
 				pf.dp.repaint();
 				int c3 = -7;
-
 				while (c3 != ZERO) {
 					System.out.println();
 					String h5 = "Play menu";
@@ -592,6 +582,13 @@ public class Main {
 	public static void main(String[] args) {
 		new Main().run();
 	}
-
-
+	
+	
+	private void setupDominoes() {
+	    gDominoes.generateDominoes();
+	    gDominoes.shuffleDominoesOrder();
+	    gDominoes.placeDominoes();
+	    gDominoes.collateGrid();
+	}
 }
+
