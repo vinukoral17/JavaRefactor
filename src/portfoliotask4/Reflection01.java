@@ -15,12 +15,4 @@ public class Reflection01 {
 	    System.out.println("b=" + fieldB.get(s));
 	  }
 	
-	/*
-	 * an instance of SimpleMultiply using the default constructor,
-	 * and then print its fields by accessing them through reflection. 
-	 * We use getField to access the public field a, and getDeclaredField to access 
-	 * the private field b. We also call setAccessible(true) on fieldB to make it accessible,
-	 *  since it is private.
-	 *  
-	 *   */
 }

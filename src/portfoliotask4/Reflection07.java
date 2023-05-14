@@ -12,8 +12,8 @@ public class Reflection07 {
 
     for (Field f : fields) {
       f.setAccessible(true);
-      System.out.printf("field name=%s type=%s value=%d\n", f.getName(),
-          f.getType(), f.getInt(s));
+      System.out.printf("field name=%s type=%s value=%f\n", f.getName(),
+          f.getType(), f.getFloat(s));
     }
   }
 }
