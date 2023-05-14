@@ -3,11 +3,9 @@ package base;
 import java.util.List;
 
 public class RotateDominos {
-	private List<Domino> dominoes;
 	private DominoHelper helper;
 	
     public RotateDominos(List<Domino> dominoes) {
-        this.dominoes = dominoes;
         this.helper = new DominoHelper(dominoes, dominoes);
     }
     

@@ -13,10 +13,7 @@ public class PictureFrame {
 	public int[] reroll = null;
 	public Main master = null;
 	public Game grd = null;
-	/*
-	 * ##### - LONG METHOD The DominoPanel class has multiple long methods that
-	 * perform multiple task and are difficult to understand
-	 */
+
 	public class DominoPanel extends JPanel {
 		private static final long serialVersionUID = 4190229282411119364L;
 

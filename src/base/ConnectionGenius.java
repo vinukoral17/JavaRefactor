@@ -23,19 +23,15 @@ public abstract class ConnectionGenius {
     public abstract void awayWeGo();
     
     
-    // Define a static factory method named createConnectionGenius that returns an instance
     public static ConnectionGenius createConnectionGenius(InetAddress ipa) {
         return new FixConnectionGenius(ipa);
     }
     public static class FixConnectionGenius extends ConnectionGenius {
-    	//Declare a private instance variable named ipa
         public InetAddress ipa;
         
-        // Define a constructor that takes an instance of InetAddress as input parameter and assign it to the ipa variable
         public FixConnectionGenius(InetAddress ipa) {
             this.ipa = ipa;
         }
-        // Implement the abstract method downloadWebVersion() and output messages to the console
         @Override
         public void downloadWebVersion() {
             System.out.println("Getting specialised web version.");
