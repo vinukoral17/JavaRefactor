@@ -1,9 +1,19 @@
 package portfoliotask4;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.*;
 import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import java.lang.reflect.Method;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class Testing {
 
@@ -99,14 +109,147 @@ public class Testing {
 	}
 
 	@Test
-	public void testSimpleMultiply() {
-		SimpleMultiply obj = new SimpleMultiply(2.0f, 3.0f);
-		obj.multiplyFloatA();
-		assertEquals(4.0f, obj.getFloatA());
-		obj.setFloatA(3.0f);
-		assertEquals(3.0f, obj.getFloatA());
-		obj.multiplyFloatB();
-		assertEquals(6.0f, obj.getFloatB());
+	public void testMultiplyFloatA() { // SIMPLEMULTIPLY CLASS
+		SimpleMultiply sm = new SimpleMultiply(2.0f, 3.0f);
+		sm.multiplyFloatA();
+		assertEquals(4.0f, sm.getFloatA());
 	}
 
+	@Test
+	public void testMultiplyFloatB() {// SIMPLEMULTIPLY CLASS
+		SimpleMultiply sm = new SimpleMultiply(2.0f, 3.0f);
+		sm.multiplyFloatB();
+		assertEquals(9.0f, sm.getFloatB());
+	}
+
+	@Test
+	public void testToString() {// SIMPLEMULTIPLY CLASS
+		SimpleMultiply sm = new SimpleMultiply(2.0f, 3.0f);
+		assertEquals("(a:2.00, b:3.00)", sm.toString());
+	}
+
+	@Test
+	public void testReflection01() throws Exception { // UNIT TEST REFLECTION 1
+		SimpleMultiply s = new SimpleMultiply();
+		Field fieldA = s.getClass().getField("a");
+		Field fieldB = s.getClass().getDeclaredField("b");
+		fieldB.setAccessible(true);
+
+		// Verify initial state
+		assertEquals(3.0f, fieldA.get(s));
+		assertEquals(2.5f, fieldB.get(s));
+	}
+
+	@Test
+	public void testReflection02() throws Exception { // UNIT TEST REFLECTION 2
+		SimpleMultiply s = new SimpleMultiply();
+		s.multiplyFloatA();
+
+		// Access private member b using reflection
+		Field bField = SimpleMultiply.class.getDeclaredField("b");
+		bField.setAccessible(true);
+		float b = (float) bField.get(s);
+
+		// Verify the result
+		assertEquals(2.5f, b);
+	}
+
+	@Test
+	public void testReflection03() {
+		SimpleMultiply s = new SimpleMultiply();
+		assertEquals("class portfoliotask4.SimpleMultiply", s.getClass().toString());
+		assertEquals("portfoliotask4.SimpleMultiply", s.getClass().getName());
+	}
+
+	@Test
+	public void testReflection04() throws Exception {
+		SimpleMultiply s = new SimpleMultiply();
+		Field[] fields = s.getClass().getFields();
+		assertEquals(1, fields.length);
+		assertEquals("a", fields[0].getName());
+		assertEquals(float.class, fields[0].getType());
+
+		float expectedValue = 3.0f;
+		float actualValue = fields[0].getFloat(s);
+		assertEquals(expectedValue, actualValue);
+	}
+
+	@Test
+	public void testReflection05() throws Exception {
+		SimpleMultiply s = new SimpleMultiply();
+		Field[] fields = s.getClass().getDeclaredFields();
+		assertEquals(2, fields.length);
+
+		Field fieldA = fields[0];
+		assertEquals("a", fieldA.getName());
+		assertEquals(float.class, fieldA.getType());
+		fieldA.setAccessible(true);
+		assertEquals(3.0f, fieldA.getFloat(s));
+
+		Field fieldB = fields[1];
+		assertEquals("b", fieldB.getName());
+		assertEquals(float.class, fieldB.getType());
+		fieldB.setAccessible(true);
+		assertEquals(2.5f, fieldB.getFloat(s));
+	}
+
+	@Test
+	public void testReflection06() throws Exception {
+		SimpleMultiply s = new SimpleMultiply();
+		Field[] fields = s.getClass().getDeclaredFields();
+		assertEquals(2, fields.length);
+
+		Field fieldA = fields[0];
+		assertEquals("a", fieldA.getName());
+		assertEquals(float.class, fieldA.getType());
+		assertFalse(fieldA.isAccessible());
+
+		Field fieldB = fields[1];
+		assertEquals("b", fieldB.getName());
+		assertEquals(float.class, fieldB.getType());
+		assertFalse(fieldB.isAccessible());
+	}
+
+	@Test
+	public void testReflection07() throws Exception {
+		SimpleMultiply s = new SimpleMultiply();
+		Field[] fields = s.getClass().getDeclaredFields();
+
+		for (Field f : fields) {
+			f.setAccessible(true);
+
+			if (f.getName().equals("a")) {
+				Assertions.assertEquals(3.0f, f.getFloat(s));
+			} else if (f.getName().equals("b")) {
+				Assertions.assertEquals(2.5f, f.getFloat(s));
+			} else {
+				Assertions.fail("Unexpected field name: " + f.getName());
+			}
+		}
+	}
+
+	@Test
+	public void testReflection08() throws Exception {
+		SimpleMultiply s = new SimpleMultiply();
+		Field[] fields = s.getClass().getDeclaredFields();
+		System.out.printf(" There are %d fields \n", fields.length);
+
+		for (Field f : fields) {
+			f.setAccessible(true);
+			Float expectedValue = f.getFloat(s) + 1;
+			f.setFloat(s, expectedValue);
+
+			Float actualValue = f.getFloat(s);
+			assertEquals(expectedValue, actualValue);
+		}
+	}
+
+	@Test
+    public void testReflection10() throws Exception {
+        SimpleMultiply s = new SimpleMultiply();
+        Method m = s.getClass().getDeclaredMethod("setA", float.class);
+        m.setAccessible(true);
+        m.invoke(s, 76);
+        assertEquals("(a:76.00, b:2.50)", s.toString());
+    }
 }

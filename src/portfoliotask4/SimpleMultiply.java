@@ -33,7 +33,7 @@ public class SimpleMultiply {
 		this.a = a;
 	}
 
-	private float getFloatB() {
+	public float getFloatB() {
 		return b;
 	}
 
